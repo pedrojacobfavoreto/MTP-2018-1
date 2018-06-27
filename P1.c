@@ -5,63 +5,46 @@
 
 
 #include <stdio.h>
-
-int main ()
+int main()
 {
-	int estado=0, i=0; 
+	int est=0, i=0, j=0;
 	char bits[256];
-	
-	printf ("Digite um numero binario: ");
-	scanf ("%s", bits);
-	
-	while(bits[i] != '\0') 
+	while (j>=0)
 	{
-		if (estado == 0 && bits[i] == '0')
-		{
-			estado = 0; 
-			i++;
+		j=0;
+		printf("Insira um numero valido para que seja determinado se este e multiplo 3: ");
+	    scanf("%s", bits);
+	    for (i=0; bits[i]!='\0'; i++)
+	    {
+	    	if (bits[i]!='0' && bits[i]!='1')
+	    	j++;
 		}
-		
-		if (estado == 0 && bits[i] != '0') 
-		{
-			estado = 1;
-			i++;
-		}
-		
-		if (estado == 1 && bits[i] == '0')
-		{
-			estado = 2; 
-			i++;
-		}
-		
-		if (estado == 1 && bits[i] != '0')
-		{
-			estado = 0;
-			i++;
-		}
-		
-		if (estado == 2 && bits[i] == '0')
-		{
-			estado = 1; 
-			i++;
-		}
-		if (estado == 2 && bits[i] != '0')
-		{
-			estado = 2;
-			i++;
-		}
-		
+		j--;
 	}
-	
-	if (estado == 0)
+	for (i=0; bits[i]!='\0'; i++)
 	{
-		printf ("O numero eh multiplo de 3.");
+		if (bits[i]=='0')
+		{
+			if (est==0)
+				est=0;
+			else if (est==2)
+			    est=1;
+			else
+			    est=2;
+		}
+		else if (bits[i]=='1')
+		{
+			if (est==2)
+			    est=2;
+			else if (est==0)
+			    est=1;
+			else
+			    est=0;
+		}
 	}
-	else 
-	{
-		printf ("O numero nao eh multiplo de 3.");
-	}
-	
-	printf ("O numero digitado eh: %s", bits);
+	if (est==0)
+	    printf("\n%s e um multiplo de 3", bits);
+	else
+	    printf("\n%s nao um multiplo de 3", bits);
 	return 0;
 }
