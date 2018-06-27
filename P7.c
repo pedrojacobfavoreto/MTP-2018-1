@@ -2,36 +2,20 @@
 //11721EAU003
 
 #include <stdio.h>
-
-int ackermann(int m, int n);
-
-int main()
-	{
-	int m, n, res;
-	printf("\nDigite M: ");
-	scanf("%d", &m);
-	getchar();
-	printf("\nDigite N: ");
-	scanf("%d", &n);
-	getchar();
-	res = ackermann(m,n);
-	printf("\nResultado: %d", res);
-	}
-	
-int ackermann(int m, int n)
+int A(int m, int n)
 {
-	int resultado;
-	if(m==0) 
-	{
-		return n+1;
-	}
-	else if(n==0) 
-	{
-		return ackermann(m-1, 1);
-	}
-	else
-	{
-		resultado=ackermann(m-1, ackermann (m, n-1));
-		return resultado;
-	}
+    if (m==0)
+        return n+1;
+    else if (m>0 && n==0)
+        return A(m-1, 1);
+    else if (m>0 && n>0)
+        return A(m-1, A(m, n-1));
+}
+int main ()
+{
+	int n=0, m=0;
+	printf("Valores para n e m:\n");
+	scanf("%d %d", &m, &n);
+	printf("%d", A(m, n));
+	return 0;
 }
