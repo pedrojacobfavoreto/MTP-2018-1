@@ -1,106 +1,113 @@
-//P3
 //Pedro Jacob Favoreto
 //11721EAU003
 
+
 #include <stdio.h>
+void conv2bin(int i)
+{
+    unsigned int u_i=0;
+    int j=0, b[32]={0};
+    u_i = (unsigned int)i;
+    for(j=31;j>=0;j--) 
+	{
+        b[j]=u_i&0x1;
+        u_i=u_i>>1;
+    }
+    for (j=0;j<=31;j++)
+        printf("%d", b[j]);
+}
+int main()
+{
+	int num=0, num2=0, menu, conv=0, bin=0, bin2=0, conv_bin=0;
+	do
+	{
+		printf("\n1. NOT \n2. AND \n3. OR \n4. XOR \n5. Right Shitf \n6. Left Shitf \n7. Sair do Programa \n:");
+		scanf("%i", &menu);
+		getchar();
+		switch(menu)
+		{
+			case 1:
+			    printf("\n: "); 
+			    scanf("%i", &num); 
+			    getchar();
+			    conv=~num;
+				printf("\nNOT %i (", num); 
+				conv2bin(num); 
+				printf(") : %i (", conv);
+				conv2bin(conv);
+				printf(")\n"); // Desculpa a gambiarra
+			    break;
+			case 2:
+				printf("\n: "); 
+			    scanf("%i %i", &num, &num2); 
+			    getchar();
+			    conv=num&num2;
+			    printf("\n %i (", num); 
+				conv2bin(num); 
+				printf(") AND %i (", num2);
+				conv2bin(num2);
+				printf(") : %i (", conv);
+				conv2bin(conv);
+				printf(")\n");
+				break;
+			case 3:
+				printf("\n: "); 
+			    scanf("%i %i", &num, &num2); 
+			    getchar();
+			    conv=num|num2;
+			    printf("\n %i (", num); 
+				conv2bin(num); 
+				printf(") OR %i (", num2);
+				conv2bin(num2);
+				printf(") : %i (", conv);
+				conv2bin(conv);
+				printf(")\n");
+				break;
+			case 4:
+				printf("\n: "); 
+			    scanf("%i %i", &num, &num2); 
+			    getchar();
+			    conv=num^num2;
+			    printf("\n %i (", num); 
+				conv2bin(num); 
+				printf(") XOR %i (", num2);
+				conv2bin(num2);
+				printf(") : %i (", conv);
+				conv2bin(conv);
+				printf(")\n");
+				break;
+			case 5:
+				printf("\n: "); 
+			    scanf("%i %i", &num, &num2); 
+			    getchar();
+			    conv=num>>num2;
+			    printf("\n %i (", num); 
+				conv2bin(num); 
+				printf(") >> %i (", num2);
+				conv2bin(num2);
+				printf(") : %i (", conv);
+				conv2bin(conv);
+				printf(")\n");
+			case 6:
+				printf("\n: "); 
+			    scanf("%i %i", &num, &num2); 
+			    getchar();
+			    conv=num<<num2;
+			    printf("\n %i (", num); 
+				conv2bin(num); 
+				printf(") << %i (", num2);
+				conv2bin(num2);
+				printf(") : %i (", conv);
+				conv2bin(conv);
+				printf(")\n");
+			default:
+				if (menu!=7)
+				{
+				printf("\nOpcao invalida");
+				break;
+		    	}
+		}
+	}while(menu!=7);
+	return 0;
+}
 
-int main ()
-{
-int m, i, e, m1;
-char bin[256], bin1[256], bin2 [256];
-printf ("OPERACOES BINARIAS (BITWISE)\n\n"
-"Escolha a operacao a ser utilizada:\n\n"
-"1. NOT\n"
-"2. AND\n"
-"3. OR\n"
-"4. XOR\n"
-"5. Right Shift\n"
-"6. Left Shift\n\n");
-scanf ("%d", &e);
-if (e == 1) // NOT
-{
-printf ("\nDigite um numero:");
-scanf ("%d", &m);
-getchar();
-itoa (m, bin, 2);
-printf ("\nNOT %d (%s)\n", m, bin);
-i = ~m;
-itoa (i, bin2, 2);
-printf ("\n:%d (%s)\n", i, bin2);
-
-}
-else if (e == 2) // AND
-{
-printf ("\nDigite um numero:");
-scanf ("%d", &m);
-getchar();
-itoa (m, bin, 2);
-printf ("\nDigite outro numero:");
-scanf ("%d", &m1);
-getchar();
-itoa (m1, bin1, 2);
-printf ("\n%d (%s)\n", m, bin);
-printf ("\nAND %d (%s)\n", m1, bin1);
-i = m&m1;
-itoa (i, bin2, 2);
-printf ("\n:%d (%s)\n", i, bin2);
-}
-else if (e == 3) // OR
-{
-printf ("\nDigite um numero:");
-scanf ("%d", &m);
-getchar();
-itoa (m, bin, 2);
-printf ("\nDigite outro numero:");
-scanf ("%d", &m1);
-getchar();
-itoa (m1, bin1, 2);
-printf ("\n%d (%s)\n", m, bin);
-printf ("\nOR %d (%s)\n", m1, bin1);
-i = m|m1;
-itoa (i, bin2, 2);
-printf ("\n:%d (%s)\n", i, bin2);
-}
-else if (e == 4) // XOR
-{
-printf ("\nDigite um numero:");
-scanf ("%d", &m);
-getchar();
-itoa (m, bin, 2);
-printf ("\nDigite outro numero:");
-scanf ("%d", &m1);
-getchar();
-itoa (m1, bin1, 2);
-printf ("\n%d (%s)\n", m, bin);
-printf ("\nXOR %d (%s)\n", m1, bin1);
-i = m^m1;
-itoa (i, bin2, 2);
-printf ("\n:%d (%s)\n", i, bin2); 
-}
-else if (e == 5) // Right Shift
-{
-int n, dado;
-printf("RIGHT SHIFT\n");
-dado = 0x8000;
-n = 5;
-printf("%04X | >> %d bits | %04X\n", dado, n, dado>>n );
-printf("%04d | >> %d bits | %04d\n", dado, n, dado>>n );
-
-}
-else if (e == 6) // Left Shift
-{
-int n, dado;
-printf("LEFT SHIFT\n");
-dado = 0x0001;
-n = 5;
-printf("%04X | << %d bits | %04X\n", dado, n, dado<<n );
-printf("%04d | << %d bits | %04d\n", dado, n, dado<<n );
-
-}
-
-else 
-{
-printf ("Opcao invalida.");
-}
-return 0;
-}
